@@ -9,7 +9,7 @@ npm ci
 npm run dev
 ```
 
-需要 Node.js 24.21.0（`.nvmrc`）。开发完成后 commit、push 到 `paas.json` 声明的部署分支（默认 main）。首次本地 push 触发检查、镜像构建和自动 HTTPS 部署。后续 `git pull` 同步自己的仓库；模板更新不会自动写入已经生成的独立仓库。
+需要 Node.js 24.21.0（`.nvmrc`）。开发完成后 commit、push 到 `paas.json` 声明的部署分支（默认 main）。创建仓库的初始提交与后续 push 均会触发检查、镜像构建和自动 HTTPS 部署。后续 `git pull` 同步自己的仓库；模板更新不会自动写入已经生成的独立仓库。
 
 默认示例无需密钥，包含服务端渲染、客户端交互、Route Handler API、`/healthz`、流式响应及 ISR。测试：
 
