@@ -1,15 +1,15 @@
 # Next.js Personal PaaS template
 
-在 GitHub 点击 **Use this template → Create a new repository**，owner 选择 `Deploy-ryanl-in`，可选公有或私有。
+在 GitHub 点击 **Use this template → Create a new repository**，owner 选择 `RyanStanLin` 或 `Deploy-ryanl-in`，可选公有或私有。
 
 ```sh
-git clone https://github.com/Deploy-ryanl-in/你的仓库.git
+git clone https://github.com/RyanStanLin/你的仓库.git
 cd 你的仓库
 npm ci
 npm run dev
 ```
 
-需要 Node.js 24.21.0（`.nvmrc`）。开发完成后 commit、push 到 `paas.json` 声明的部署分支（默认 main）。创建仓库的初始提交与后续 push 均会触发检查、镜像构建和自动 HTTPS 部署。后续 `git pull` 同步自己的仓库；模板更新不会自动写入已经生成的独立仓库。
+需要 Node.js 24.21.0（`.nvmrc`）。开发完成后 commit、push 到 `paas.json` 声明的部署分支（默认 main）。创建仓库后首次本地 push 会触发检查、镜像构建和自动 HTTPS 部署。后续 `git pull` 同步自己的仓库；模板更新不会自动写入已经生成的独立仓库。
 
 默认示例无需密钥，包含服务端渲染、客户端交互、Route Handler API、`/healthz`、流式响应及 ISR。测试：
 
@@ -32,4 +32,4 @@ npm run test:smoke
 
 **Actions → PaaS operations** 提供状态、日志、回滚、停用、加密备份下载及恢复。停用保留数据卷；恢复须确认 `RESTORE <repository ID>`。数据库只允许管理员批准的同大版本更新，代码回滚不回滚数据。
 
-组织内新仓库自动接入；个人仓库需 repository ID 白名单。平台管理员须先完成一次性服务器与凭据配置。模板不携带任何账号密钥。
+已绑定的 RyanStanLin 个人账号和 Deploy-ryanl-in 组织内新仓库均自动接入，无需逐仓库白名单。平台管理员须先完成一次性服务器与凭据配置。模板不携带任何账号密钥。
