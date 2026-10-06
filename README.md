@@ -33,3 +33,5 @@ npm run test:smoke
 **Actions → PaaS operations** 提供状态、日志、回滚、停用、加密备份下载及恢复。停用保留数据卷；恢复须确认 `RESTORE <repository ID>`。数据库只允许管理员批准的同大版本更新，代码回滚不回滚数据。
 
 已绑定的 RyanStanLin 个人账号和 Deploy-ryanl-in 组织内新仓库均自动接入，无需逐仓库白名单。平台管理员须先完成一次性服务器与凭据配置。模板不携带任何账号密钥。
+
+完整配置和操作 SOP 见 [平台 Wiki](https://github.com/Deploy-ryanl-in/personal-paas/wiki)。手动 Actions 支持 start/stop/restart/delete/cleanup-images；stop 保留容器，delete 删除容器并保留命名卷，start 重建最后成功版本。自定义 services.web.domain 随 push 更新；共享域名需在每个服务声明相同 routing.sharedGroup，paths 为可选路径过滤器，支持尾部 /*。请求复制给所有匹配服务，只有一个非404响应时返回它，多个响应返回409多服务冲突。所有参与服务都能看到 Actions 共享服务名单。
