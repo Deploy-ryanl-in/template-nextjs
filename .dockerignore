@@ -8,3 +8,7 @@ playwright-report
 
 paas.secrets.json
 local-data
+
+**/.env*
+**/paas.secrets.json
+**/local-data

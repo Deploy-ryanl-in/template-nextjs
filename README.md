@@ -35,3 +35,20 @@ npm run test:smoke
 已绑定的 RyanStanLin 个人账号和 Deploy-ryanl-in 组织内新仓库均自动接入，无需逐仓库白名单。平台管理员须先完成一次性服务器与凭据配置。模板不携带任何账号密钥。
 
 完整配置和操作 SOP 见 [平台 Wiki](https://github.com/Deploy-ryanl-in/personal-paas/wiki)。手动 Actions 支持 start/stop/restart/delete/cleanup-images；stop 保留容器，delete 删除容器并保留命名卷，start 重建最后成功版本。自定义 services.web.domain 随 push 更新；共享域名需在每个服务声明相同 routing.sharedGroup，paths 为可选路径过滤器，支持尾部 /*。请求复制给所有匹配服务，只有一个非404响应时返回它，多个响应返回409多服务冲突。所有参与服务都能看到 Actions 共享服务名单。
+
+## 本地 PostgreSQL + Redis 开发
+
+需要本地 Docker Engine / Docker Compose（Linux、Docker Desktop 或已有的 OrbStack）。以下只在开发机器启动数据库，不修改 VPS；密码独立于生产 `PAAS_SECRETS`。
+
+```sh
+python3 scripts/create-local-env.py
+docker compose --env-file .env.local -f compose.dev.yml up -d --wait
+set -a
+source .env.local
+set +a
+npm run dev
+```
+
+PostgreSQL 绑定 `127.0.0.1:15432`，Redis 绑定 `127.0.0.1:16379`；账号/数据库默认为 `app`。`.env.local` 由脚本生成、权限600且被忽略，已有文件不会覆盖。数据库与Redis都有密码，数据放在开发 Compose 命名卷。开发结束执行 `docker compose --env-file .env.local -f compose.dev.yml down`，数据卷保留。
+
+Next.js 示例保留默认页面；使用数据库时在自己的服务端代码中接入连接库，不把密码放进 `NEXT_PUBLIC_*`。

@@ -6,3 +6,8 @@ coverage/
 test-results/
 playwright-report/
 *.tsbuildinfo
+
+.env*
+!.env.example
+local-data/
+paas.secrets.json
