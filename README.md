@@ -52,3 +52,7 @@ npm run dev
 PostgreSQL 绑定 `127.0.0.1:15432`，Redis 绑定 `127.0.0.1:16379`；账号/数据库默认为 `app`。`.env.local` 由脚本生成、权限600且被忽略，已有文件不会覆盖。数据库与Redis都有密码，数据放在开发 Compose 命名卷。开发结束执行 `docker compose --env-file .env.local -f compose.dev.yml down`，数据卷保留。
 
 Next.js 示例保留默认页面；使用数据库时在自己的服务端代码中接入连接库，不把密码放进 `NEXT_PUBLIC_*`。
+
+## 共享路由缓存
+
+每次部署分支push会独立清除本仓库涉及子域名的路由缓存，CI失败也执行。缓存命中仍复制请求，唯一已确认服务响应后立即返回；迟到冲突会清缓存并记录日志。手动使用Actions的 `route-cache` / `clear-route-cache`，可填完整domain或留空清本仓库全部相关域名。详情见[路由缓存](https://github.com/Deploy-ryanl-in/personal-paas/wiki/Route-cache)。
